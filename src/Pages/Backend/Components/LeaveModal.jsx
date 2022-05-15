@@ -8,7 +8,7 @@ const LeaveModal = ({ isModalVisible, handleOk, handleCancel }) => {
     console.log(data);
 
     return (
-        <Modal title="打卡上班" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Modal title="查看假單" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
             <div className="mdContainer">
                 <h1>請假起日:{data.startTime}</h1>
                 <h1>請假迄日:{data.endTime}</h1>

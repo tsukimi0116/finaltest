@@ -26,13 +26,19 @@ const Home = () => {
 
     const [phone, setPhone] = useState('');
 
+    const [phone2, setPhone2] = useState('');
+
     const [time, setTime] = useState('')
 
     const inputOnchange = (event) => {
         setPhone(event.target.value)
     }
 
-    const loginClick = async (event) => {
+    const inputOnchange2 = (event) => {
+        setPhone2(event.target.value)
+    }
+
+    const loginCheck = async (event) => {
         let result = await Axios.get(`http://localhost:9191/users/check?phone=${phone}`)
         let users = result.data.user
         try {
@@ -50,7 +56,7 @@ const Home = () => {
     }
 
     const loginFunc = async () => {
-        let result = await Axios.post('http://localhost:9191/users/login', { phone: phone })
+        let result = await Axios.post('http://localhost:9191/users/login', { phone: phone2 })
         try {
             sessionStorage.setItem('token', result.data.token)
             setTimeout(() => {
@@ -80,11 +86,11 @@ const Home = () => {
                     <div data-category="0" className="CheckContainer" onClick={divClick}>
                         <h1>打卡上/下班</h1>
                         <input onChange={inputOnchange} value={phone} placeholder="輸入手機號碼" type="text" />
-                        <button onClick={loginClick}>登入系統</button>
+                        <button onClick={loginCheck}>登入系統</button>
                     </div>
                     <div data-category="1" className="BackendContainer" onClick={divClick}>
                         <h1>後臺管理</h1>
-                        <input onChange={inputOnchange} placeholder="輸入手機號碼" type="text" />
+                        <input onChange={inputOnchange2} value={phone2} placeholder="輸入手機號碼" type="text" />
                         <button onClick={loginFunc}>登入系統</button>
                     </div>
                 </div>
@@ -95,7 +101,6 @@ const Home = () => {
                 handleCancel={handleCancel}
             />}
         </>
-
     )
 }
 
